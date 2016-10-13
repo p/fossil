@@ -1,1 +1,7 @@
 .fslckout
+
+/Makefile
+/autoconfig.h
+/bld
+/config.log
+/fossil
