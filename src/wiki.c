@@ -262,6 +262,8 @@ void wiki_helppage(void){
   style_header("Wiki Help");
   wiki_standard_submenu(W_ALL_BUT(W_HELP));
   @ <h2>Wiki Links</h2>
+  @ <h3> %z(href("%R/wcontent"))All wiki pages</a> &middot;
+  @ %z(href("%R/wikinew"))New wiki page</a></h3>
   @ <ul>
   { char *zWikiHomePageName = db_get("index-page",0);
     if( zWikiHomePageName ){
