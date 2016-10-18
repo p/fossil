@@ -145,12 +145,12 @@ const char *wiki_filter_mimetypes(const char *zMimetype){
         return azStyles[i];
       }
     }
-    if(  fossil_strcmp(zMimetype, "text/x-markdown")==0
+    if(  fossil_strcmp(zMimetype, "text/x-fossil-wiki")==0
         || fossil_strcmp(zMimetype, "text/plain")==0 ){
       return zMimetype;
     }
   }
-  return "text/x-fossil-wiki";
+  return "text/x-markdown";
 }
 
 /*
@@ -346,7 +346,7 @@ void wiki_page(void){
   if( isSandbox ){
     submenuFlags &= ~W_SANDBOX;
     zBody = db_get("sandbox",zBody);
-    zMimetype = db_get("sandbox-mimetype","text/x-fossil-wiki");
+    zMimetype = db_get("sandbox-mimetype","text/x-markdown");
     rid = 0;
   }else{
     const char *zUuid = P("id");
@@ -502,7 +502,7 @@ void wikiedit_page(void){
     }
     if( zBody==0 ){
       zBody = db_get("sandbox","");
-      zMimetype = db_get("sandbox-mimetype","text/x-fossil-wiki");
+      zMimetype = db_get("sandbox-mimetype","text/x-markdown");
     }
   }else{
     zTag = mprintf("wiki-%s", zPageName);
@@ -537,9 +537,9 @@ void wikiedit_page(void){
       blob_appendf(&wiki, "D %s\n", zDate);
       free(zDate);
       blob_appendf(&wiki, "L %F\n", zPageName);
-      if( fossil_strcmp(zMimetype,"text/x-fossil-wiki")!=0 ){
+      /* if( fossil_strcmp(zMimetype,"text/x-fossil-wiki")!=0 ){ */
         blob_appendf(&wiki, "N %s\n", zMimetype);
-      }
+      /* } */
       if( rid ){
         char *zUuid = db_text(0, "SELECT uuid FROM blob WHERE rid=%d", rid);
         blob_appendf(&wiki, "P %s\n", zUuid);
@@ -659,7 +659,7 @@ void wikinew_page(void){
   @ <p>Name of new wiki page:
   @ <input style="width: 35;" type="text" name="name" value="%h(zName)" /><br />
   @ Markup style:
-  mimetype_option_menu("text/x-fossil-wiki");
+  mimetype_option_menu("text/x-markdown");
   @ <br /><input type="submit" value="Create" />
   @ </p></form>
   if( zName[0] ){
@@ -771,9 +771,9 @@ void wikiappend_page(void){
       zDate = date_in_standard_format("now");
       blob_appendf(&wiki, "D %s\n", zDate);
       blob_appendf(&wiki, "L %F\n", zPageName);
-      if( fossil_strcmp(zMimetype, "text/x-fossil-wiki")!=0 ){
+      /* if( fossil_strcmp(zMimetype, "text/x-fossil-wiki")!=0 ){ */
         blob_appendf(&wiki, "N %s\n", zMimetype);
-      }
+      /* } */
       if( rid ){
         char *zUuid = db_text(0, "SELECT uuid FROM blob WHERE rid=%d", rid);
         blob_appendf(&wiki, "P %s\n", zUuid);
@@ -1098,7 +1098,7 @@ int wiki_cmd_commit(const char *zPageName, int rid, Blob *pContent,
   free(zDate);
   blob_appendf(&wiki, "L %F\n", zPageName );
   if( zMimeType && *zMimeType
-      && 0!=fossil_strcmp(zMimeType,"text/x-fossil-wiki") ){
+      /* && 0!=fossil_strcmp(zMimeType,"text/x-fossil-wiki") */ ){
     blob_appendf(&wiki, "N %F\n", zMimeType);
   }
   if( rid ){
