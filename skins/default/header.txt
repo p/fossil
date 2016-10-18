@@ -10,7 +10,7 @@
 
   <body>
     <div class="header">
-      <div class="title"><h1>$<project_name></h1>$<title></div>
+      <div class="title"><a href='/'><h1>$<project_name></h1></a>$<title></div>
         <div class="status"><th1>
      if {[info exists login]} {
        html "$login — <a href='$home/login'>Logout</a>\n"
