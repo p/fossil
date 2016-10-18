@@ -35,13 +35,6 @@ menulink $index_page Home
 if {[anycap jor]} {
   menulink /timeline Timeline
 }
-if {[hascap oh]} {
-  menulink /dir?ci=tip Files
-}
-if {[hascap o]} {
-  menulink  /brlist Branches
-  menulink  /taglist Tags
-}
 if {[hascap r]} {
   menulink /ticket Tickets
 }
