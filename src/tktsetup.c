@@ -306,7 +306,7 @@ static const char zDefaultNew[] =
 @      if {$mutype eq "HTML"} {
 @        set mimetype "text/html"
 @      } elseif {$mutype eq "Wiki"} {
-@        set mimetype "text/x-fossil-wiki"
+@        set mimetype "text/x-markdown"
 @      } elseif {$mutype eq {[links only]}} {
 @        set mimetype "text/x-fossil-plain"
 @      } else {
@@ -590,7 +590,7 @@ static const char zDefaultEdit[] =
 @   if {![info exists username]} {set username $login}
 @   if {[info exists submit]} {
 @     if {$mutype eq "Wiki"} {
-@       set mimetype text/x-fossil-wiki
+@       set mimetype text/x-markdown
 @     } elseif {$mutype eq "HTML"} {
 @       set mimetype text/html
 @     } elseif {$mutype eq {[links only]}} {
